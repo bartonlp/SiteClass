@@ -14,24 +14,12 @@ if($_site || $__VERSION_ONLY === true) {
 // NOTE: we can get $_site from the mysitemap.json at bartonlp.com/otherpages because all of the
 // inportant information is passed to this program via 'php://input'
 
-// If $_site is null try the autoload.php which should be off this directory
-
-if($_SERVER['REMOTE_ADDR'] == '195.252.232.86') {
-  error_log("*** beacon.php HP-Envy Server, use autoload.php");  
-  $_site = require_once("autoload.php"); // We are at ~/bartonphillips.org/site-class/includes.
-  $_site->trackerLocationJs =  'https://bartonphillips.org/site-class/includes/tracker.js';
-  $_site->trackerLocation = 'https://bartonphillips.org/site-class/includes/tracker.php';
-  $_site->beaconLocation = 'https://bartonphillips.org/site-class/includes/beacon.php';
-} else {
-  $_site = require_once(getenv("SITELOADNAME"));
-}
+$_site = require_once(getenv("SITELOADNAME"));
 
 $_site->noTrack = true;
 $_site->noGeo = true;
 
 $S = new Database($_site);
-//error_log("*** beacon.php \$S=" . var_export($S, true));
-          
 
 //$DEBUG1 = true; // COUNTED real+1 bots-1
 //$DEBUG2 = true; // After update tracker table

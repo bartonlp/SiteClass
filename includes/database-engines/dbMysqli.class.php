@@ -73,7 +73,7 @@ class dbMysqli extends mysqli {
     parent::__construct($host, $user, $password, $database, $port); // $port is usually null.
 
     // BLP 2021-12-31 -- EST/EDT New York
-    $this->query("set time_zone='EST5EDT'");
+    //$this->query("set time_zone='EST5EDT'");
     $this->database = $database;
   } // End of constructor.
 
@@ -154,7 +154,7 @@ class dbMysqli extends mysqli {
    * You will have to use the native PHP functions with the returned $stm.
    */
   
-  public function prepare($query) {
+  public function sqlPrepare($query) {
     $stm = $this->prepare($query);
     return $stm;
   }
