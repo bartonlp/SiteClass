@@ -61,7 +61,7 @@ jQuery(document).ready(function($) {
 
   let picture = '';
 
-  //console.log("phoneImg="+phoneImg+", desktopImg="+desktopImg+", phoneImg2="+phoneImg2+", desktopImg2="+desktopImg2);
+  console.log("phoneImg="+phoneImg+", desktopImg="+desktopImg+", phoneImg2="+phoneImg2+", desktopImg2="+desktopImg2);
   
   if(!phoneImg) {
     picture += "<img id='logo' src=" + desktopImg + " alt='desktopImage'>";
