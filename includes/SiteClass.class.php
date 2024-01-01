@@ -3,7 +3,7 @@
 // Note that the constructor calls the Database constructor which in turn call the
 // dbMysqli constructor which does all of the heavy lifting.
 
-define("SITE_CLASS_VERSION", "4.0.0");
+define("SITE_CLASS_VERSION", "4.0.0mysqli");
 
 // One class for all my sites
 /**
