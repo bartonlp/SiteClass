@@ -18,7 +18,7 @@
   //"noTrack": true, // If true no tracking is done.
   //"nodb": true, // If true then no database actions can happen.
   //"emailDomain": "Your email domain",
-  "path": "/var/www/bartonphillips.org/vendor/bartonlp/site-class/examples", // Change this to your server 
+  //"path": "/var/www/bartonphillips.org/vendor/bartonlp/site-class/examples", // Change this to your server 
   "className": "SiteClass", // This could be a child class that extends SiteClass
   "copyright": "Barton L. Phillips",
   "author": "Barton L. Phillips, mailto:bartonphillips@gmail.com",
@@ -35,7 +35,7 @@
     "host": "localhost",
     "user": "barton", // You can change this sute yourself
     "database": "barton", // Same here.
-    "engine": "mysqli" // Currently there is only ONE PHP database and it is mysql
+    "engine": "mysql" // Currently there is only ONE PHP database and it is mysql
   },
   // errorMode controls how exceptions and error are displayed. See
   // ErrorClass.class.php and SqlException.class.php for more details.
