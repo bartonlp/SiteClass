@@ -1,11 +1,13 @@
 <?php
-// WhatIsLoaded class.
+// WhatIsLoaded.
 // We return an array with one numeric and the rest are name=>value pairs.
 // Look at the getWhatIsInfo() method for what is returned.
 
 namespace bartonlp\whatisloaded;
 
-define("WHATISLOADED_VERSION", "3.0.0whatis");
+define("WHATISLOADED_VERSION", "3.0.1whatisloaded");
+
+// Define a class within a closed function. The class is not available from the outside world.
 
 (function() {
   class WhatIsLoaded {
@@ -25,8 +27,8 @@ define("WHATISLOADED_VERSION", "3.0.0whatis");
     public function __construct() {
       $__VERSION_ONLY = true; // also used by siteload.php, tracker.php, beacon.php.
 
-      $this->site = require(getenv("SITELOADNAME"));
-      //require("/var/www/vendor/autoload.php");
+      //$this->site = require(getenv("SITELOADNAME"));
+      require("/var/www/tysonweb/docs/site-class/includes/autoload.php");
       
       $this->site = SITELOAD_VERSION;
 
@@ -82,5 +84,7 @@ EOF;
     }
   }
 })();
+
+// Here we have a simple return of the info.
 
 return (new WhatIsLoaded)->getWhatIsInfo();
