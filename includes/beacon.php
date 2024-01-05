@@ -10,11 +10,17 @@ if($_site || $__VERSION_ONLY === true) {
   return BEACON_VERSION;
 }
 
-// The normal beacon starts here.
-// NOTE: we can get $_site from the mysitemap.json at bartonlp.com/otherpages because all of the
-// inportant information is passed to this program via 'php://input'
+// If this is my home server try the autoload.php which should be off this directory
 
-$_site = require_once(getenv("SITELOADNAME"));
+if($_SERVER['HTML_HOST'] == 'bartonphillips.org') {
+  $_site = require_once("autoload.php"); // We are at ~/bartonphillips.org/site-class/includes.
+  error_log("*** tracker.php HP-Envy Server, use autoload.php");
+  $_site->trackerLocationJs =  'https://bartonphillips.org/site-class/includes/tracker.js';
+  $_site->trackerLocation = 'https://bartonphillips.org/site-class/includes/tracker.php';
+  $_site->beaconLocation = 'https://bartonphillips.org/site-class/includes/beacon.php';
+} else {
+  $_site = require_once(getenv("SITELOADNAME"));
+}
 
 $_site->noTrack = true;
 $_site->noGeo = true;
