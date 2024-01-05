@@ -27,8 +27,8 @@ define("WHATISLOADED_VERSION", "3.0.1whatisloaded");
     public function __construct() {
       $__VERSION_ONLY = true; // also used by siteload.php, tracker.php, beacon.php.
 
-      //$this->site = require(getenv("SITELOADNAME"));
-      require("/var/www/tysonweb/docs/site-class/includes/autoload.php");
+      $this->site = require(getenv("SITELOADNAME"));
+      //require("/var/www/site-class/includes/autoload.php");
       
       $this->site = SITELOAD_VERSION;
 
