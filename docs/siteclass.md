@@ -1,4 +1,4 @@
-# SiteClass and Database Methods (version 3.8.0 and 3.0.0)
+# SiteClass (version 4.0.0mysqli) and Database (5.0.1database-mysqli)
 
 ---
 
@@ -86,6 +86,6 @@ I hardly ever use prepare(), bindParam(), bindResults() or execute() so they are
 ## Contact Me
 
 Barton Phillips : <a href="mailto://bartonphillips@gmail.com">bartonphillips@gmail.com</a>
-Copyright &copy; 2023 Barton Phillips  
+Copyright &copy; 2024 Barton Phillips  
 Project maintained by [bartonlp](https://github.com/bartonlp)  
-Last modified November 8, 2023
+Last modified January 5, 2024
