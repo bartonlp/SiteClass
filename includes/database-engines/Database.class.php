@@ -2,7 +2,7 @@
 /* Well tested and maintained */
 // All of the tracking and counting logic that is in this file.
 
-define("DATABASE_CLASS_VERSION", "5.0.0database"); // BLP 2023-02-24 -
+define("DATABASE_CLASS_VERSION", "5.0.1database-mysqli"); // BLP 2023-02-24 -
 require_once(__DIR__ . "/../defines.php"); // This has the constants for TRACKER, BOTS, BOTS2, and BEACON
 
 /**
@@ -12,16 +12,15 @@ require_once(__DIR__ . "/../defines.php"); // This has the constants for TRACKER
 class Database extends dbMysqli {
   /**
    * constructor
-   * @param $s object. $isSiteClass bool.
+   * @param $s object
    * $s should have all of the $this from SiteClass or $_site from mysitemap.json
    * To just pass in the required database options set $s->dbinfo = (object) $ar
    * where $ar is an assocative array with ["host"=>"localhost",...]
-   * $isSiteClass is true if this is from SiteClass.
    */
 
   protected $hitCount = 0;
 
-  public function __construct(object $s, ?bool $isSiteClass=null) {
+  public function __construct(object $s) {
     // If we have $s items use them otherwise get the defaults
 
     $s->ip = $s->ip ?? $_SERVER['REMOTE_ADDR'];
@@ -49,11 +48,7 @@ class Database extends dbMysqli {
 
     // BLP 2023-11-13 - we can pass $this which is esentially $_site with some stuff added.
     
-<<<<<<< Updated upstream
     parent::__construct($this); // dbMysqli constructor.
-=======
-    parent::__construct($s); // dbPdo constructor.
->>>>>>> Stashed changes
 
     // The dbMysqli does not need or use myIp but Database does.
     // If the user is not 'barton' then then noTrack should be set.
