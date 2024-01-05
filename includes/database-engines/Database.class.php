@@ -49,7 +49,11 @@ class Database extends dbMysqli {
 
     // BLP 2023-11-13 - we can pass $this which is esentially $_site with some stuff added.
     
+<<<<<<< Updated upstream
     parent::__construct($this); // dbMysqli constructor.
+=======
+    parent::__construct($s); // dbPdo constructor.
+>>>>>>> Stashed changes
 
     // The dbMysqli does not need or use myIp but Database does.
     // If the user is not 'barton' then then noTrack should be set.
@@ -599,42 +603,19 @@ class Database extends dbMysqli {
 
   private function CheckIfTablesExist():array {
     // Do all of the table checks once here.
-    // NOTE: $this->debug() function is declared in dbMysqli.class.php.
+    // Do all of the table checks once here.
+    // We look at the tables and compare them to a list of tables we should have.
     
-    if(!$this->sql("select TABLE_NAME from information_schema.tables where (table_schema = '$this->masterdb') and (table_name = 'bots')")) {
-      $this->debug("Database $this->siteName: $this->self: table bots does not exist in the $this->masterdb database: ". __LINE__, true);
-    }
-    if(!$this->sql("select TABLE_NAME from information_schema.tables where (table_schema = '$this->masterdb') and (table_name = 'bots2')"))  {
-      $this->debug("Database $this->siteName: $this->self: table bots2 does not exist in the $this->masterdb database: ". __LINE__, true);
-    }
-    if(!$this->sql("select TABLE_NAME from information_schema.tables where (table_schema = '$this->masterdb') and (table_name = 'tracker')")) {
-      $this->debug("Database $this->siteName: $this->self: table tracker does not exist in the $this->masterdb database: ". __LINE__, true);
-    }
-    if(!$this->sql("select TABLE_NAME from information_schema.tables where (table_schema = '$this->masterdb') and (table_name = 'myip')")) {
-      $this->debug("Database $this->siteName: $this->self: table myip does not exist in the $this->masterdb database: ". __LINE__, true);
-    }
-    if(!$this->sql("select TABLE_NAME from information_schema.tables where (table_schema = '$this->masterdb') and (table_name = 'counter')")) {
-      $this->debug("Database $this->siteName: $this->self: table counter does not exist in the $this->masterdb database: ". __LINE__, true);
-    }      
-    if(!$this->sql("select TABLE_NAME from information_schema.tables where (table_schema = '$this->masterdb') and (table_name = 'counter2')")) {
-      $this->debug("Database $this->siteName: $this->self: table bots does not exist in the $this->masterdb database: ". __LINE__, true);
-    }
-    if(!$this->sql("select TABLE_NAME from information_schema.tables where (table_schema = '$this->masterdb') and (table_name = 'daycounts')")) {
-      $this->debug("Database $this->siteName: $this->self: table daycounts does not exist in the $this->masterdb database: ". __LINE__, true);
-    }
-    if(!$this->sql("select TABLE_NAME from information_schema.tables where (table_schema = '$this->masterdb') and (table_name = 'logagent')")) {
-      $this->debug("Database $this->siteName: $this->self: table logagent does not exist in the $this->masterdb database: " . __LINE__, true);
+    $n = $this->sql("show tables from $this->masterdb"); // Request all the tables
+    $tbls = [];
+
+    while($tbl = $this->fetchrow('num')[0]) {
+      $tbls[] = $tbl;
     }
 
-    // The masterdb must be owned by 'barton'. That is the dbinfo->user must be
-    // 'barton'. There is one database where this is not true. The 'test' database has a
-    // mysitemap.json file that has dbinfo->user as 'test'. It is in the
-    // bartonphillips.com/exmples.js/user-test directory.
-    // In general all databases that are going to do anything with counters etc. must have a user
-    // of 'barton' and $this->nodb false. The program without 'barton' can NOT do any calls via masterdb!
-
-    if(!$this->sql("select TABLE_NAME from information_schema.tables where (table_schema = '$this->masterdb') and (table_name = 'myip')")) {
-      $this->debug("Database $this->siteName: $this->self: table myip does not exist in the $this->masterdb database: ". __LINE__, true);
+    $ar = array_diff(['badplayer', 'bots', 'bots2', 'counter', 'counter2', 'daycounts', 'myip', 'logagent', 'dayrecords', 'geo'], $tbls);
+    if(!empty($ar)) {
+      throw new Exception("Database.class.php: Missing tables -- " . implode(',', $ar));
     }
 
     $this->sql("select myIp from $this->masterdb.myip");
