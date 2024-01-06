@@ -2,7 +2,7 @@
 /* Well tested and maintained */
 // All of the tracking and counting logic that is in this file.
 
-define("DATABASE_CLASS_VERSION", "5.0.1database-mysqli"); // BLP 2023-02-24 -
+define("DATABASE_CLASS_VERSION", "5.0.2database-mysqli"); // BLP 2024-01-06 - in_array() replaces array_intersect()
 require_once(__DIR__ . "/../defines.php"); // This has the constants for TRACKER, BOTS, BOTS2, and BEACON
 
 /**
@@ -135,7 +135,7 @@ class Database extends dbMysqli {
 
   public function isMyIp(string $ip):bool {
     if($this->isMeFalse === true) return false;
-    return (!empty(array_intersect([$ip], $this->myIp)));
+    return (in_array($ip, $this->myIp));
   }
   
   /**
