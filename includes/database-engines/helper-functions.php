@@ -2,7 +2,7 @@
 /* HELPER FUNCTIONS. Well tested and maintained */
 // BLP 2023-10-04 - added varexport() functions.
 
-define("HELPER_FUNCTION_VERSION", "1.1.2helper"); // BLP 2023-10-04 - 
+define("HELPER_FUNCTION_VERSION", "1.1.2helper-mysqli"); // BLP 2023-10-04 - 
 
 /**
  * Helper Functions

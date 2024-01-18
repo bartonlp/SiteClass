@@ -5,7 +5,7 @@
 
 namespace bartonlp\whatisloaded;
 
-define("WHATISLOADED_VERSION", "3.0.1whatisloaded");
+define("WHATISLOADED_VERSION", "3.0.2whatisloaded-mysqli");
 
 // Define a class within a closed function. The class is not available from the outside world.
 

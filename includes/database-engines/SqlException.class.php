@@ -6,7 +6,7 @@
  * Extends Exception
  */
 
-define("SQLEXCEPTION_CLASS_VERSION", "4.0.0exception"); // BLP 2023-06-23 - 
+define("SQLEXCEPTION_CLASS_VERSION", "4.0.0exception-mysqli"); // BLP 2023-06-23 - 
 
 class SqlException extends Exception {
   /**

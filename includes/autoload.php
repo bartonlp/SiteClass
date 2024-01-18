@@ -1,6 +1,9 @@
 <?php
 // Auto load classes
 
+error_reporting(E_ALL & ~E_DEPRECATED & ~E_STRICT & ~E_WARNING & ~E_NOTICE);
+
+git log --all --graph -p --decorate > ~/www/bartonlp.com/gitlog-simple
 if(!function_exists("_callback")) { // In case we call autoload twice.
   function _callback($class) {
     switch($class) {
@@ -22,7 +25,7 @@ ErrorClass::setDevelopment(true);
 
 date_default_timezone_set('America/New_York'); // Done here and in dbPdo.class.php constructor.
 
-define("SITELOAD_VERSION", "1.1.2autoload"); // BLP 2024-01-15 - add SERVER and port logic
+define("SITELOAD_VERSION", "1.1.3autoload-mysql"); // BLP 2024-01-15 - add SERVER and port logic
 define("SITECLASS_DIR", __DIR__);
 
 if($__VERSION_ONLY) {
