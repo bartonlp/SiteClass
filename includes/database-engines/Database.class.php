@@ -36,7 +36,7 @@ class Database extends dbMysqli {
     
     // If no 'dbinfo' (no database) in mysitemap.json set everything so the database is not loaded.
     
-    if($this->nodb === true || is_null($this->dbinfo)) {
+    if($this->dbinfo->engine == "sqlite" || $this->nodb === true || is_null($this->dbinfo)) {
       $this->count = false;
       $this->noTrack = true; // If nodb then noTrack is true also.
       $this->nodb = true;    // Maybe $this->dbinfo was null
@@ -55,6 +55,8 @@ class Database extends dbMysqli {
     
     if($this->noTrack !== false && ($this->dbinfo->user == "barton" || $this->user == "barton")) { // make sure its the 'barton' user!
       $this->myIp = $this->CheckIfTablesExist(); // Check if tables exit and get myIp
+    } else {
+      $this->myIp = ["195.252.232.86"]; // BLP 2024-01-19 - force a single address into myIp so other functions will not fail
     }
 
     // Escapte the agent in case it has something like an apostraphy in it.
