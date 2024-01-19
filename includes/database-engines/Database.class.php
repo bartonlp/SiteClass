@@ -33,10 +33,14 @@ class Database extends dbMysqli {
     foreach($s as $k=>$v) {
       $this->$k = $v;
     }
-    
+
     // If no 'dbinfo' (no database) in mysitemap.json set everything so the database is not loaded.
     
     if($this->dbinfo->engine == "sqlite" || $this->nodb === true || is_null($this->dbinfo)) {
+      if($this->dbinfo->engine == "sqlite" && $this->noTrack !== true) {
+        $this->logagent();
+      }
+    
       $this->count = false;
       $this->noTrack = true; // If nodb then noTrack is true also.
       $this->nodb = true;    // Maybe $this->dbinfo was null
@@ -67,7 +71,7 @@ class Database extends dbMysqli {
     // and are always done regardless of 'count'!
     // If $this->nodb or there is no $this->dbinfo we have made $this->noTrack true and
     // $this->count false
-    
+
     if($this->noTrack !== true) {
       // BLP 2023-10-02 - get all of the $_SERVER info.
       //$this->getserver(); // BLP 2023-12-28 - removed 
