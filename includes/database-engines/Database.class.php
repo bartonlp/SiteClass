@@ -35,18 +35,14 @@ class Database extends dbMysqli {
     }
 
     // If no 'dbinfo' (no database) in mysitemap.json set everything so the database is not loaded.
-    
-    if($this->dbinfo->engine == "sqlite" || $this->nodb === true || is_null($this->dbinfo)) {
-      if($this->dbinfo->engine == "sqlite" && $this->noTrack !== true) {
-        $this->logagent();
-      }
-    
+
+    if($this->nodb === true || is_null($this->dbinfo)) {
       $this->count = false;
       $this->noTrack = true; // If nodb then noTrack is true also.
       $this->nodb = true;    // Maybe $this->dbinfo was null
       $this->dbinfo = null;  // Maybe nodb was set
       return; // If we have NO DATABASE just return.
-    }
+    } 
 
     $db = null;
 
@@ -57,10 +53,8 @@ class Database extends dbMysqli {
     // The dbMysqli does not need or use myIp but Database does.
     // If the user is not 'barton' then then noTrack should be set.
     
-    if($this->noTrack !== false && ($this->dbinfo->user == "barton" || $this->user == "barton")) { // make sure its the 'barton' user!
+    if($this->noTrack !== true && ($this->dbinfo->user == "barton" || $this->user == "barton")) { // make sure its the 'barton' user!
       $this->myIp = $this->CheckIfTablesExist(); // Check if tables exit and get myIp
-    } else {
-      $this->myIp = ["195.252.232.86"]; // BLP 2024-01-19 - force a single address into myIp so other functions will not fail
     }
 
     // Escapte the agent in case it has something like an apostraphy in it.
@@ -73,11 +67,8 @@ class Database extends dbMysqli {
     // $this->count false
 
     if($this->noTrack !== true) {
-      // BLP 2023-10-02 - get all of the $_SERVER info.
-      //$this->getserver(); // BLP 2023-12-28 - removed 
-      
       $this->logagent();   // This logs Me and everybody else! This is done regardless of $this->isBot or $this->isMe().
-
+      
       // checkIfBot() must be done before the rest because everyone uses $this->isBot.
 
       $this->checkIfBot(); // This set $this->isBot. Does a isMe() so I never get set as a bot!
@@ -551,26 +542,11 @@ class Database extends dbMysqli {
     // site, ip and agent(256) are the primary key. Note, agent is a text field so we look at the
     // first 256 characters here (I don't think this will make any difference).
 
-    if($this->dbinfo->engine == "sqlite") {
-      $sql = "insert into logagent (site, ip, agent, count, created, lasttime) " .
-             "values('$this->siteName', '$this->ip', '$this->agent', '1', datetime('now'), datetime('now'))";
-      try {
-        $this->sql($sql);
-      } catch(Exception $e) {
-        if($e->getCode() == "23000") {
-          $this->sql("update logagent set count=count+1, lasttime=datetime('now') ".
-                     "where site='$this->siteName' and ip='$this->ip' and agent='$this->agent'");
-        } else {
-          throw $e;
-        }
-      }
-    } else {
-      $sql = "insert into $this->masterdb.logagent (site, ip, agent, count, created, lasttime) " .
-             "values('$this->siteName', '$this->ip', '$this->agent', '1', now(), now()) ".
-             "on duplicate key update count=count+1, lasttime=now()";
+    $sql = "insert into $this->masterdb.logagent (site, ip, agent, count, created, lasttime) " .
+           "values('$this->siteName', '$this->ip', '$this->agent', '1', now(), now()) ".
+           "on duplicate key update count=count+1, lasttime=now()";
 
-      $this->sql($sql);
-    }
+    $this->sql($sql);
   }
   
   // ************
