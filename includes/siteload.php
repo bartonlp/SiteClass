@@ -15,8 +15,13 @@ error_reporting(E_ALL & ~E_DEPRECATED & ~E_STRICT & ~E_WARNING & ~E_NOTICE);
 
 define("SITELOAD_VERSION", "2.2.2siteload-mysqli"); 
 define("SITECLASS_DIR", __DIR__);
+
 // Get the autoload.php from my /var/www/vendor. This should always be where it is! On the
 // DititalOcean server, on HP_Envy and on Rpi.
+// NOTE: vendor/autoload.php always loads from vendor/bartonlp/site-class!
+// SO if you are testing use site-class/includes/autoload.php which will get the latest version of
+// the classes while vendor/autoload.php may not!
+
 require_once("/var/www/vendor/autoload.php");
 require_once("/var/www/vendor/bartonlp/site-class/includes/database-engines/helper-functions.php");
 
