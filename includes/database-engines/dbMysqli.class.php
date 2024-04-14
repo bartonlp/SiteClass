@@ -50,7 +50,9 @@ class dbMysqli extends mysqli {
     // Extract the items from dbinfo. This is $host, $user and maybe $password and $port.
     
     extract((array)$siteInfo->dbinfo); // Cast the $dbinfo object into an array
-      
+
+    // BLP 2024-04-14 - NOTE: This does no use the $engine it is ONLY used by the pdo branch!
+    
     // BLP 2023-01-15 - START. For PHP 8 and above.
     $driver = new mysqli_driver();
     $driver->report_mode = MYSQLI_REPORT_OFF;

@@ -35,7 +35,8 @@
     "host": "localhost",
     "user": "barton", // You can change this sute yourself
     "database": "barton", // Same here.
-    "engine": "mysql" // Only if using PDO
+    "engine": "mysql", // Only if using PDO the dbMysql class does NOT USE THIS!
+    "DUMMY": null
   },
   // errorMode controls how exceptions and error are displayed. See
   // ErrorClass.class.php and SqlException.class.php for more details.
@@ -46,7 +47,8 @@
                          // Only false not null or just missing.
     "noEmail": null,     // Don't send email messages
     "noHtml": false,     // Don't display HTML, just plain text if true
-    "noOutput": false    // Don't output anything if true
+    "noOutput": false,    // Don't output anything if true
+    "DUMMY": null
   },
   "headFile": "/var/www/bartonphillips.com/includes/head.i.php", // location of the head, banner, and footer files
   "bannerFile": "/var/www/bartonphillips.com/includes/banner.i.php",
