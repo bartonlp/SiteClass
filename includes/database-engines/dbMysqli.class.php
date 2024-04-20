@@ -10,8 +10,9 @@
  * @copyright Copyright (c) 2010, Barton Phillips
  * @license http://opensource.org/licenses/gpl-3.0.html GPL Version 3
  */
+// BLP 2024-04-20 - Set mysql time_zone.
 
-define("MYSQL_CLASS_VERSION", "5.0.0mysqli"); 
+define("MYSQL_CLASS_VERSION", "5.0.1mysqli"); 
 
 /**
  * See http://www.php.net/manual/en/mysqli.overview.php for more information on the Improved API.
@@ -74,8 +75,8 @@ class dbMysqli extends mysqli {
 
     parent::__construct($host, $user, $password, $database, $port); // $port is usually null.
 
-    // BLP 2021-12-31 -- EST/EDT New York
-    //$this->query("set time_zone='EST5EDT'");
+    $this->sql("set time_zone='US/Eastern'"); //BLP 2024-04-20 - set mysql time zone
+    
     $this->database = $database;
   } // End of constructor.
 
