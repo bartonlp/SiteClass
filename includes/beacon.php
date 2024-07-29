@@ -1,7 +1,7 @@
 <?php
 // Beacon from tracker.js
 
-define("BEACON_VERSION", "4.0.0beacon-mysql");
+define("BEACON_VERSION", "4.0.1beacon-mysql"); // BLP 2024-07-29 - remove bartonphillips.org logic.
 
 // BLP 2023-01-30 - If you want the version defined ONLY and no other information.
 // If we have a valid $_site or the $__VERSION_ONLY, then just return the version info.
@@ -10,17 +10,7 @@ if($_site || $__VERSION_ONLY === true) {
   return BEACON_VERSION;
 }
 
-// If this is my home server try the autoload.php which should be off this directory
-
-if($_SERVER['HTML_HOST'] == 'bartonphillips.org') {
-  $_site = require_once("autoload.php"); // We are at ~/bartonphillips.org/site-class/includes.
-  error_log("*** tracker.php HP-Envy Server, use autoload.php");
-  $_site->trackerLocationJs =  'https://bartonphillips.org/site-class/includes/tracker.js';
-  $_site->trackerLocation = 'https://bartonphillips.org/site-class/includes/tracker.php';
-  $_site->beaconLocation = 'https://bartonphillips.org/site-class/includes/beacon.php';
-} else {
-  $_site = require_once(getenv("SITELOADNAME"));
-}
+$_site = require_once(getenv("SITELOADNAME"));
 
 $_site->noTrack = true;
 $_site->noGeo = true;
