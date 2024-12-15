@@ -1,5 +1,5 @@
 {
-  "name": "bartonlp/site-class",
+  "name": "bartonlp/old-site-class",
   "description": "PHP framework to make creating websites easier",
   "license": "MIT",
   "authors": [
@@ -12,7 +12,7 @@
   "repositories": [
   {
     "type": "git",
-    "url": "git@github.com:bartonlp/site-class.git"
+    "url": "git@github.com:bartonlp/old-site-class.git"
   }
   ],
   "require": {
